@@ -1,0 +1,32 @@
+# Byte-compiled / optimized Python files
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+env/
+
+# Local development settings
+*.sqlite3
+*.pyc
+*.pyo
+*.pyc
+*.pyo
+
+# Static files
+/static/
+
+# Media files
+/media/
+
+# Log files
+*.log
+
+# Ignore Django migration files
+**/migrations/
+
+# Ignore secret settings file
+secret_settings.py
+
+# Ignore system files
+.DS_Store

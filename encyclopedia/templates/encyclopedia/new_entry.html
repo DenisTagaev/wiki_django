@@ -1,0 +1,28 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block body %}
+    <h3 class="form-text mt-4 mx-auto col-md-6">Please enter new article info into the form below:</h3>
+    {% if error_message %}
+        <p class="form-text text-danger mx-auto col-md-6">{{ error_message }}</p>
+    {% endif %}
+
+    <form action="/new_entry" method="POST" class="mt-4 mx-auto col-md-6">
+        {% csrf_token %}
+    
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" class="form-control" name="title" id="title" required>
+        </div>
+    
+        <div class="form-group">
+            <label for="content">Content:</label>
+            <textarea class="form-control" name="content" id="content" cols="30" rows="10" required></textarea>
+        </div>
+    
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}

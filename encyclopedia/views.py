@@ -20,6 +20,25 @@ def entry(request, entry):
         "title": req_title
     })
 
+def new_entry(request):
+    if request.method == 'GET':
+        return render(request, "encyclopedia/new_entry.html", {
+            "title": 'New Entry'
+        })
+
+    if request.method == 'POST':
+        title = request.POST["title"]
+        content = request.POST["content"]
+
+        if util.get_entry(title) is not None:
+            return render(request, "encyclopedia/new_entry.html", {
+                "title": 'New Entry',
+                "error_message": 'Article with this title already exists'
+            })
+
+        util.save_entry(title, content)
+        return redirect(f'/wiki/{title}')
+
 def non_existent_entry(request):
     return render(request, "encyclopedia/404.html", {
         "title": 'Error'

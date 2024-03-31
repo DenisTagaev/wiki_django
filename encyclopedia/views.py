@@ -8,6 +8,26 @@ def index(request):
         "title": 'Encyclopedia'
     })
 
+def index_search(request):
+    query = request.POST.get('q')
+    autofocus = True
+
+    if query:
+        if util.get_entry(query):
+            return entry(request, query)
+
+        # Filter entries where the name includes the query
+        filtered_entries = [ent for ent in util.list_entries() if query.lower() in ent.lower()]
+    else:
+        # If no query provided, return all entries
+        filtered_entries = util.list_entries()
+
+    return render(request, "encyclopedia/index.html", {
+        "entries": filtered_entries,
+        "title": 'Encyclopedia',
+        "autofocus": autofocus
+    })
+
 def entry(request, entry):
     entry = util.get_entry(entry)
     req_title = request.path_info.strip('/').split('/')[-1]

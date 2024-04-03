@@ -1,5 +1,6 @@
+import random
 from django.shortcuts import render, redirect
-
+from markdown2 import Markdown
 from . import util
 
 def index(request):
@@ -30,15 +31,20 @@ def index_search(request):
 
 def entry(request, entry):
     entry = util.get_entry(entry)
+    markdowner = Markdown()
     req_title = request.path_info.strip('/').split('/')[-1]
 
     if not entry:
         return redirect('/error')
 
     return render(request, "encyclopedia/entry.html", {
-        "entry": entry,
+        "entry": markdowner.convert(entry),
         "title": req_title
     })
+
+def random_entry(request):
+    selected_entry = random.choice(util.list_entries())
+    return redirect(f'/wiki/{selected_entry}')
 
 def new_entry(request):
     if request.method == 'GET':

@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block body %}
-    <h1>All Pages</h1>
+    <h1 class="display-4">All Pages</h1>
 
-    <ul>
+    <ul class="list-group list-group-flush">
         {% for entry in entries %}
-            <li>
+            <li class="list-group-item">
                 <a href="{% url 'e_entry' entry=entry %}">{{ entry }}</a>
             </li>
         {% endfor %}

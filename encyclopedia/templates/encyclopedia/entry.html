@@ -5,5 +5,10 @@
 {% endblock %}
 
 {% block body %}
-    {{ entry | safe }}
+    <div class="container mt-3">
+        {{ entry | safe }}
+        <a href="{% url 'wiki_edit_entry' entry_title=title %}" class="btn btn-warning">
+            <i class="fas fa-pencil-alt me-1 px-1"></i>Edit Entry
+        </a>
+    </div>
 {% endblock %}

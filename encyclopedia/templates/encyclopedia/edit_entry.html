@@ -1,0 +1,20 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block body %}
+<h3 class="form-text mt-4 mx-auto col-md-6">{{ title }}</h3>
+
+<form action="{% url 'wiki_edit_entry' entry_title=title %}" method="POST" class="mt-4 mx-auto col-md-6">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label for="content">Edit content in the area below:</label>
+        <textarea class="form-control" name="content" id="content" cols="30" rows="10" required>{{ entry }}</textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

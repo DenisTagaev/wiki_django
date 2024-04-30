@@ -31,7 +31,7 @@ def index_search(request):
 
 def entry(request, entry):
     entry = util.get_entry(entry)
-    markdowner = Markdown()
+    markdowner = Markdown(extras=["break-on-newline"])
     req_title = request.path_info.strip('/').split('/')[-1]
 
     if not entry:
@@ -55,7 +55,7 @@ def edit_entry(request, entry_title):
         })
 
     if request.method == 'POST':
-        content = request.POST["content"]
+        content = "\n".join(line.strip() for line in request.POST["content"].split("\n"))
         util.save_entry(entry_title, content)
         return redirect(f'/wiki/{entry_title}')
 
